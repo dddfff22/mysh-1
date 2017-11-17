@@ -1,5 +1,5 @@
 #include "utils.h"
-
+#include "commands.h"
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <string.h>

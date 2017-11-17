@@ -38,6 +38,10 @@ int do_fg(int argc, char** argv) {
 
   // TODO: Fill this.
 
+  int pid;
+  pid=getpid();
+  printf("%d\n",pid);
+
   return 0;
 }
 
@@ -51,6 +55,28 @@ int validate_cd_argv(int argc, char** argv) {
   if (!S_ISDIR(buf.st_mode)) return 0;
 
   return 1;
+}
+
+int validate_dir(int argc, char** argv) {
+  char TEMP[10000];
+  char PATH[10][100]={"","/usr/bin/","usr/local/bin/","/bin/","/usr/sbin/","/sbin/"};
+  int i;
+  for(i=0;i<6;i++){
+  struct stat buf;
+  strcpy(TEMP,PATH[i]);
+  strcat(TEMP,argv[0]);
+
+  if(stat(TEMP, &buf)<0){
+     continue;
+  }
+  
+  if (S_ISREG(buf.st_mode))
+  {
+   strcpy(argv[0],TEMP);
+   return 1;
+  }
+  }
+  return 0;
 }
 
 int validate_pwd_argv(int argc, char** argv) {

@@ -1,4 +1,5 @@
 #include "signal_handlers.h"
+#include <signal.h>
 
 void catch_sigint(int signalNo)
 {
